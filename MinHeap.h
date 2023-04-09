@@ -24,7 +24,7 @@ public:
 	void insert(Ride*);
 
 	/*Called incase of update Function*/
-	void increasekey(Ride* ride);
+	void increasekey(Ride* ride, int newTripDuration);
 
 	/* getNextRide performs the Remove min operation - pops topmost Ride Node and returns it
 		This also includes a heapify_down step to place the last element in left subtree at node and then heapify*/

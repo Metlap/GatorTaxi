@@ -68,7 +68,7 @@ void Taxi::updateTrip(int rideNumber, int newTripDuration) {
 		return;
 	}
 	else if ((toUpdateRide->getTripDuration() < newTripDuration) && (newTripDuration <= 2 * (toUpdateRide->getTripDuration()))) {
-		minHeap->increasekey(toUpdateRide);
+		minHeap->increasekey(toUpdateRide, newTripDuration);
 		return;
 	}
 	else {
