@@ -6,6 +6,7 @@
 #include "MinHeap.h"
 #include "RBTree.h"
 #include "IOterm.h"
+#include <fstream>
 
 class Taxi {
 public:
@@ -15,12 +16,16 @@ public:
 
 	Taxi();
 
-	void insertRide(int rideNumber, int rideCost, int tripDuration);
-	void printRide(int rideNumber);
-	void printRidesInRange(int rideNumber1, int rideNumber2);
+	void insertRide(int rideNumber, int rideCost, int tripDuration, std::ofstream& outFile);
+	void printRide(int rideNumber, std::ofstream& outFile);
+	void printRidesInRange(int rideNumber1, int rideNumber2, std::ofstream& outFile);
 	void updateTrip(int rideNumber, int newTripDuration);
 	void cancelRide(int rideNumber);
-	void getNextRide();
+	void getNextRide(std::ofstream& outFile);
+	void readInputFromFile(std::string, std::vector<IOterm*>& actionList);
+	void takeAction(std::ofstream& outfile);
+	
 };
-void printRideToFile(Ride* ride);
+
+
 #endif // !TAXI_H

@@ -115,16 +115,17 @@ std::vector<Ride*> RBTree::getRidesInRangeFromRBTree(int rideNumber1, int rideNu
     return rangeRides;
 }
 
-void BSTInsert(RBNode*& RBTreeRoot, RBNode* newNode) {
+int BSTInsert(RBNode*& RBTreeRoot, RBNode* newNode) {
 
     if (RBTreeRoot == nullptr) {
         RBTreeRoot = newNode;
-        return;
+        return 1;
     }
     // Duplicate record case
     if (newNode->getRide()->getRideNumber() == RBTreeRoot->getRide()->getRideNumber())
     {
-        throw std::invalid_argument("The inserted ride has a duplicate rideNumber: " + std::to_string(newNode->getRide()->getRideNumber()));
+        return 0;
+        //throw new std::invalid_argument("The inserted ride has a duplicate rideNumber: " + std::to_string(newNode->getRide()->getRideNumber()));
     }
     newNode->parent = RBTreeRoot;
     if (newNode->getRide()->getRideNumber() < RBTreeRoot->getRide()->getRideNumber()) // insert to left
@@ -237,10 +238,14 @@ void adjustTwoRed(RBNode* p, RBTree* tree) {
 }
 
 /*Called when we insert a Ride in RBTree*/
-void RBTree::insertRideInRBTree(Ride* toInsert) {
+int RBTree::insertRideInRBTree(Ride* toInsert) {
     RBNode* newNode = new RBNode(toInsert);
-    BSTInsert(RBTreeRoot, newNode);
+    int res = BSTInsert(RBTreeRoot, newNode);
+    if (res == 0) {
+        return 0;
+    }
     adjustTwoRed(newNode, this);
+    return 1;
 }
 
     /* Called as part of the remove operation to 

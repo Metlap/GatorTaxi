@@ -165,9 +165,9 @@ void MinHeap::insert(Ride* ride) {
 }
 
 /*Called incase of update call*/
-void MinHeap::increasekey(Ride* ride, int newTripDuration) {
+void MinHeap::increasekey(Ride* ride, int additionalCost, int newTripDuration) {
 	// do increase key
-	ride->rideCost += 10;
+	ride->rideCost += additionalCost;
 	ride->tripDuration = newTripDuration;
 	// adjust position of the increased key
 	heapifyTopDown(minHeapRides, ride);

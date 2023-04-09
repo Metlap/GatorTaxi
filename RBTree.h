@@ -43,7 +43,7 @@ public:
 	RBNode* RBTreeRoot;
 	RBTree();
 	/*To insert a new ride in RBTree*/
-	void insertRideInRBTree(Ride* ride);
+	int insertRideInRBTree(Ride* ride);
 	/*Called within insert function, to make insertion in BST tree 
 	and update the parent pointer of newly inserted node */
 	//void BSTInsert(RBNode* &RBTreeRoot, RBNode* node);

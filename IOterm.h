@@ -8,7 +8,7 @@ enum actions {
 	Insert,
 	GetNextRide,
 	CancelRide,
-	UpdateTrim
+	UpdateTrip
 };
 class IOterm {
 public:

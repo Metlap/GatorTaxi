@@ -2,46 +2,59 @@
 //
 
 #include <iostream>
+#include<fstream>
 #include "Taxi.h"
 
-int main()
+// Main function that creates an object of the Taxi class and reads from the input file
+int main(int argc, char** argv)
 {
-    std::cout << "Hello World!\n";
-    Taxi* taxi = new Taxi();
-    /*Ride ride(1, 2, 4);
-    Ride r2(2, 10, 34);*/
-    /*taxi->insertRide(2,2,4);
-    taxi->insertRide(1, 10, 34);
-    taxi->printRide(2);
-    taxi->getNextRide();
-    taxi->printRide(1);
-    taxi->printRide(2); */    
+    //Output file stream
+    std::ofstream outputFile("output_file.txt");
 
-    taxi->insertRide(25, 98, 46);
-    taxi->getNextRide();
-    taxi->getNextRide();
-    taxi->insertRide(42, 17, 89);
-    taxi->insertRide(9, 76, 31);
-    taxi->insertRide(53, 97, 22);
-    taxi->getNextRide();
-    taxi->insertRide(68, 40, 51);
-    taxi->getNextRide();
-    taxi->printRidesInRange(1,100);
-    taxi->updateTrip(53, 15);
-    taxi->insertRide(96, 28, 82);
-    taxi->insertRide(73, 28, 56);
-    taxi->updateTrip(9, 88);
-    taxi->getNextRide();
-    taxi->printRide(9);
-    taxi->insertRide(20, 49, 59);
-    taxi->insertRide(62, 7, 10);
-    taxi->cancelRide(20);
-    taxi->insertRide(25, 49, 46);
-    taxi->updateTrip(62, 15);
-    taxi->getNextRide();
-    taxi->printRidesInRange(1, 100);
-    taxi->insertRide(53, 28, 19);
-    taxi->printRidesInRange(1, 100);
+    Taxi* taxi = new Taxi();
+
+    if (argc == 1) {
+        taxi->insertRide(25, 98, 46, outputFile);
+        taxi->getNextRide(outputFile);
+        taxi->getNextRide(outputFile);
+        taxi->insertRide(42, 17, 89, outputFile);
+        taxi->insertRide(9, 76, 31, outputFile);
+        taxi->insertRide(53, 97, 22, outputFile);
+        taxi->getNextRide(outputFile);
+        taxi->insertRide(68, 40, 51, outputFile);
+        taxi->getNextRide(outputFile);
+        taxi->printRidesInRange(1, 100, outputFile);
+        taxi->updateTrip(53, 15);
+        taxi->insertRide(96, 28, 82, outputFile);
+        taxi->insertRide(73, 28, 56, outputFile);
+        taxi->updateTrip(9, 88);
+        taxi->getNextRide(outputFile);
+        taxi->printRide(9, outputFile);
+        taxi->insertRide(20, 49, 59, outputFile);
+        taxi->insertRide(62, 7, 10, outputFile);
+        taxi->cancelRide(20);
+        taxi->insertRide(25, 49, 46, outputFile);
+        taxi->updateTrip(62, 15);
+        taxi->getNextRide(outputFile);
+        taxi->printRidesInRange(1, 100, outputFile);
+        taxi->insertRide(53, 28, 19, outputFile);
+        taxi->printRidesInRange(1, 100, outputFile);
+    }
+    // File passed as argument
+    if (argc > 1) {
+        // Read input from the input file passed as commandline arguments 
+        taxi->readInputFromFile(argv[1], taxi->actionList);
+        while (true) {
+            if ((taxi->actionList).size() == 0) {
+                return 0;
+            }
+            taxi->takeAction(outputFile);
+        }
+
+    }
+
+    outputFile.close();
+    return 0;
 
 }
 
