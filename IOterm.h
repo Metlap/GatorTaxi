@@ -12,7 +12,9 @@ enum actions {
 };
 class IOterm {
 public:
+	//Operation to be performed (Eg print, insert, getNextride etc.,)
 	int action;
+	//Parameters of that action
 	std::vector<int> parameters;
 };
 

@@ -45,7 +45,7 @@ Ride* RBNode::getRide()
 {
     return this->ride;
 }
-
+/*Returns the sibling node of the current node*/
 RBNode* RBNode::getSibling() {
 
     if (parent == nullptr)
@@ -115,6 +115,7 @@ std::vector<Ride*> RBTree::getRidesInRangeFromRBTree(int rideNumber1, int rideNu
     return rangeRides;
 }
 
+/*To insert a node in the RBTree., which is a BST. After this, we need to fix the violations caused to RBTree properties*/
 int BSTInsert(RBNode*& RBTreeRoot, RBNode* newNode) {
 
     if (RBTreeRoot == nullptr) {
@@ -211,8 +212,9 @@ void twoRedRotation(RBNode* p, RBNode* pp, RBNode* gp, RBTree* tree) {
     if (pp == gp->right && p == pp->left) RLb_rotation(p, pp, gp, tree);
 }
 
+/* adjust if p and pp are both red */
 void adjustTwoRed(RBNode* p, RBTree* tree) {
-    /* adjust if p and pp are both red */
+    
     RBNode* pp = p->parent;
     if (pp == nullptr) { // p is root
         p->color = BLACK;
@@ -248,9 +250,7 @@ int RBTree::insertRideInRBTree(Ride* toInsert) {
     return 1;
 }
 
-    /* Called as part of the remove operation to 
-    adjust if py is the parent of a deficient node
-     * v is the sibling of the deficient node */
+/* Called as part of the remove operation to adjust if py is the parent of a deficient node v is the sibling of the deficient node */
 void adjustDeficient(RBNode* py, RBNode* v, RBTree* tree) {
 
     if (py == nullptr)
