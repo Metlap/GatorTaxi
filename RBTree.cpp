@@ -331,9 +331,8 @@ void adjustDeficient(RBNode* py, RBNode* v, RBTree* tree) {
     }
 }
 
-/* Method to find the rightmost leaf in the left subtree and replace
- * assuming toreplace has both left and right child
- * return the leaf node */
+/* Method to find the rightmost leaf in the left subtree and 
+replace assuming toreplace has both left and right child return the leaf node */
 RBNode* replace(RBNode* toreplace) {
 
     RBNode* thisNode = toreplace->left;
