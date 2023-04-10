@@ -131,9 +131,11 @@ void Taxi::updateTrip(int rideNumber, int newTripDuration) {
 		return;
 	}
 	else {
-		minHeap->remove(toUpdateRide);
+		if (toUpdate->ride->getRideNumber() != 0) {
+			minHeap->remove(toUpdateRide);
+		}
 		rbTree->removeRideFromRBTree(toUpdateRide->rideNumber);
-		return;
+			return;
 	}
 }
 
@@ -142,7 +144,9 @@ void Taxi::cancelRide(int rideNumber) {
 	RBNode* toCancel = rbTree->get(rideNumber);
 	Ride* toCancelRide = toCancel->ride;
 	rbTree->removeRideFromRBTree(rideNumber);
-	minHeap->remove(toCancelRide);
+	if (toCancel->ride->getRideNumber() != 0){
+		minHeap->remove(toCancelRide);
+	}
 }
 
 void Taxi::getNextRide(std::ofstream& outFile) {
