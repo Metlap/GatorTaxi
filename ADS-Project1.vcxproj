@@ -24,7 +24,7 @@
     <ProjectGuid>{6fba5a33-42e6-4b83-b2f8-7684431b6ada}</ProjectGuid>
     <RootNamespace>ADSProject1</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>GatorTaxi</ProjectName>
+    <ProjectName>gatorTaxi</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -128,7 +128,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="GatorTaxi.cpp" />
+    <ClCompile Include="gatorTaxi.cpp" />
     <ClCompile Include="IOterm.cpp" />
     <ClCompile Include="MinHeap.cpp" />
     <ClCompile Include="RBTree.cpp" />
