@@ -44,10 +44,12 @@ public:
 	RBTree();
 	/*To insert a new ride in RBTree*/
 	int insertRideInRBTree(Ride* ride);
+
 	/*Called within insert function, to make insertion in BST tree 
 	and update the parent pointer of newly inserted node */
 	//void BSTInsert(RBNode* &RBTreeRoot, RBNode* node);
 
+	/*Get rides in the given range*/
 	std::vector<Ride*> getRidesInRangeFromRBTree(int rideNumber1, int rideNumber2);
 	//int compareRideNumbersInRBTree(RBNode* r1, RBNode* r2);
 

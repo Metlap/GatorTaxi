@@ -89,7 +89,7 @@ void printRideToFile(Ride* ride, std::ofstream& outFile) {
 	outFile << "(" << ride->getRideNumber() << "," << ride->rideCost << "," << ride->getTripDuration() << ")";
 }
 
-
+/*To write the output to file*/
 void printRidesToFile(std::vector<Ride*>& rides, std::ofstream& outFile) {
 	if (outFile.is_open()) {
 		for (size_t i = 0; i < rides.size(); i++) {
@@ -136,11 +136,10 @@ void Taxi::printRidesInRange(int rideNumber1, int rideNumber2, std::ofstream& ou
 
 // UpdateTrip(rideNumber, new_tripDuration) where the rider wishes to change the destination, in
 
-// a) if the Ride =  getByRideNumber in RBT  and if new_tripDuration <= existing tripDuration, there would be no action needed.
-// 
+// a) if the Ride =  getByRideNumber in RBT  and if new_tripDuration <= existing tripDuration, 
+// just update the tripDuration to the new_tripDuration.
 // b) if the existing_tripDuration < new_tripDuration <= 2 * (existing tripDuration), 
 // increment key(rideNumber, rideCost + 10,	new_tripDuration) in Minheap
-
 //	c) if the new_tripDuration > 2 * (existing tripDuration), remove from both	
 
 void Taxi::updateTrip(int rideNumber, int newTripDuration) {
