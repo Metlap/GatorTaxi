@@ -12,6 +12,30 @@ Taxi::Taxi() {
 
 }
 
+/*Function to print the RBTree for debugging purposes*/
+void printTree(RBNode* root, int edge = 0) {
+	int tab = 10;
+	if (root == nullptr) return;
+	//edge += tab;
+	printTree(root->right, edge);
+	std::cout << std::endl;
+	for (size_t i = tab; i < edge; i++) std::cout << " ";
+	std::cout << root->ride->rideNumber << "(" << (root->color == RED ? "r" : "b") << ")" << std::endl;
+	printTree(root->left, edge);
+}
+
+/*Function to print the MinHeap for debugging purposes*/
+void printheap(MinHeap* heap, int rootind = 0, int edge = 0) {
+	int tab = 10;
+	if (rootind < 0 || rootind >= heap->minHeapRides.size()) return;
+	//edge += tab;
+	printheap(heap, 2* rootind +2, edge);
+	std::cout << std::endl;
+	for (size_t i = tab; i < edge; i++) std::cout << " ";
+	std::cout << heap->minHeapRides.at(rootind)->rideNumber << "(" << heap->minHeapRides.at(rootind)->rideCost << ")" << std::endl;
+	printheap(heap, 2*rootind+1, edge);
+}
+
 /* Called to get the action term from each line command of the input file*/
 void getActionTerm(std::string line, IOterm*& thisTerm) {
 
@@ -120,6 +144,14 @@ void Taxi::printRidesInRange(int rideNumber1, int rideNumber2, std::ofstream& ou
 //	c) if the new_tripDuration > 2 * (existing tripDuration), remove from both	
 
 void Taxi::updateTrip(int rideNumber, int newTripDuration) {
+
+	/*std::cout << "Heap is" << std::endl;
+	printheap(this->minHeap);
+	std::cout << "_______________________________________________________________________________________________" << std::endl;
+	std::cout << "Tree is" << std::endl;
+	printTree(this->rbTree->RBTreeRoot);
+	std::cout << "________________________________________________________________________________________________" << std::endl;*/
+
 	RBNode* toUpdate = rbTree->get(rideNumber);
 	Ride* toUpdateRide = toUpdate->ride;
 	if (newTripDuration <= toUpdateRide->getTripDuration()) {
@@ -133,9 +165,10 @@ void Taxi::updateTrip(int rideNumber, int newTripDuration) {
 	else {
 		if (toUpdate->ride->getRideNumber() != 0) {
 			minHeap->remove(toUpdateRide);
-		}
-		rbTree->removeRideFromRBTree(toUpdateRide->rideNumber);
+			rbTree->removeRideFromRBTree(toUpdateRide->rideNumber);
 			return;
+		}
+
 	}
 }
 
@@ -143,8 +176,8 @@ void Taxi::cancelRide(int rideNumber) {
 
 	RBNode* toCancel = rbTree->get(rideNumber);
 	Ride* toCancelRide = toCancel->ride;
-	rbTree->removeRideFromRBTree(rideNumber);
 	if (toCancel->ride->getRideNumber() != 0){
+		rbTree->removeRideFromRBTree(rideNumber);
 		minHeap->remove(toCancelRide);
 	}
 }
@@ -167,6 +200,17 @@ void Taxi::getNextRide(std::ofstream& outFile) {
 }
 
 void Taxi::takeAction( std::ofstream& outFile) {
+
+	
+	//std::cout << "________________________________________________________________________________________________" << std::endl;
+	//std::cout << "Action is ::" << this->actionList.front()->action << std::endl;
+	//std::cout << "Heap is" << std::endl;
+	//printheap(this->minHeap);
+	//std::cout << "_______________________________________________________________________________________________" << std::endl;
+	//std::cout << "Tree is" << std::endl;
+	//printTree(this->rbTree->RBTreeRoot);
+	//std::cout << "________________________________________________________________________________________________" << std::endl;
+	
 	
 	IOterm* term = this->actionList.front();
 	if (term->action == Insert) {
